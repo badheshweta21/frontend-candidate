@@ -1,0 +1,23 @@
+<div *ngIf="userDetails">
+    <div class="back-button">
+        <a (click)="handleBack()">Back to Search Page</a>
+    </div>
+    <div *ngIf="!loading" class="details-container">
+        <div class="name-container">{{userDetails.name}}</div>
+        <div class="favorite-color-container">Favorite Color: {{userDetails.favorite_color | titlecase}}</div>
+        <div class="quotes-container">
+            <div class="no_quote_msg" *ngIf="userDetails.quotes.length===0">
+                <p>No quote available</p>
+            </div>
+            <div *ngFor="let quote of userDetails.quotes">
+                <app-quote [quote]="quote"></app-quote>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="loading" class="loading-container">
+        Loading
+    </div>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>

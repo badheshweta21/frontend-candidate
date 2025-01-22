@@ -1,0 +1,47 @@
+<form class="form-container" (ngSubmit)="submitSearchForm()">
+    <div class="form-group">
+        <input
+          type="text" 
+          name="searchTerm" 
+          aria-placeholder="Search"
+          class="form-control" 
+          placeholder="Search" 
+          [ngModel]="searchTerm" 
+          (ngModelChange)="searchTermChange($event)" 
+          required />
+      </div>
+    <div class="form-group">
+        <select class="form-control" 
+                name="favColor"
+                aria-placeholder="Select"   
+                [ngModel]="selectedColor"   
+                (ngModelChange)="colorOptionChange($event)">
+        <option *ngFor="let color of colorList" [value]="color.value">{{color.label}}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn">Search</button>
+</form>
+<div class="search-error" *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>
+<div class="person-card-count" *ngIf="!showNoResultsFoundMsg">
+    Search For People
+</div>
+<div *ngIf="searchResults">
+    <div *ngIf="loading">
+        Loading
+    </div>
+    <div class="person-card-count" *ngIf="!loading && searchResults.length > 0">
+        Total: {{searchResults.length}} .
+    </div>
+    <div class="person-card-count" *ngIf="!errorMessage && showNoResultsFoundMsg && searchResults.length === 0">
+        No results found.
+    </div>
+    <div *ngIf="!errorMessage">
+        Search Results:
+    </div>
+    <div class="person-card-container">
+        
+        <app-person-card *ngFor="let result of searchResults" [person]="result"></app-person-card>
+    </div>
+</div>

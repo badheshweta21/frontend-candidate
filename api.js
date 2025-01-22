@@ -61,7 +61,7 @@ const data = {
                   "I'm sure I put my keys right over there.",
                   "Listen more, speak less."],
        }
-      ],
+      ]
 }
 
 // Configure the secure express server
@@ -74,6 +74,8 @@ app.use(function (req, res, next) {
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   // Pass to next layer of middleware
   next();
